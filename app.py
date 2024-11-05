@@ -8,6 +8,17 @@ app = Flask(__name__)
 def hello():
     return HELLO_HTML.format(str(datetime.now()))
 
+# Dynamic search endpoint in the URL
+@app.route('/search/<query>', methods=['GET'])
+def search(query):
+    # Process the query as needed (e.g., analyze for SQL keywords, etc.)
+    # Here, we just echo back the query and timestamp
+    return jsonify({
+        "message": "Search query received",
+        "query": query,
+        "timestamp": str(datetime.now())
+    })
+
 # Endpoint to handle GET, POST, PUT, DELETE requests
 @app.route('/process', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def process_request():
@@ -34,8 +45,9 @@ HELLO_HTML = """
     <input type="text" id="firstname" name="fname" placeholder="firstname">
     <label for="lastname">Last Name:</label>
     <input type="text" id="lastname" name="lname" placeholder="lastname">
-    <button type="submit">Login</button>
+    <button type="submit">Submit</button>
     </form>
+    <p>Use the /search/&lt;query&gt; endpoint in the URL to perform a search.</p>
 """
 
 if __name__ == "__main__":
