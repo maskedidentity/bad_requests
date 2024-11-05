@@ -39,5 +39,5 @@ HELLO_HTML = """
 """
 
 if __name__ == "__main__":
-    # Launch the Flask dev server
-    app.run(host="localhost", debug=True)
+    # Run the app on all network interfaces
+    app.run(host="0.0.0.0", port=5000, debug=True)
